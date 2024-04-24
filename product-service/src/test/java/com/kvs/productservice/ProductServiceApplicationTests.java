@@ -72,6 +72,22 @@ class ProductServiceApplicationTests {
 		);
 	}
 
+	// This test method is still under development
+	@Test
+	void shouldDeleteProduct() throws Exception {
+
+		Assertions.assertEquals(1, productRepository.findAll().size());
+
+		String productId = productRepository.findAll().get(0).getId();
+
+		mockMvc.perform(
+				MockMvcRequestBuilders.delete("/api/product/delete/" + productId)
+						.contentType(MediaType.APPLICATION_JSON)
+		).andExpect(
+				status().isOk()
+		);
+	}
+
 	private ProductRequestDTO getProductRequest() {
 		return ProductRequestDTO.builder()
 				.name("Product 1")
