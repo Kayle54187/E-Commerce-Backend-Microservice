@@ -7,7 +7,9 @@ import com.kvs.productservice.Model.Product;
 import com.kvs.productservice.Repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -42,5 +44,16 @@ public class ProductService {
                 .description(product.getDescription())
                 .price(product.getPrice())
                 .build();
+    }
+
+    public ProductResponseDTO getProductById(String id) {
+        Product product = productRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        return mapProductToProductResponse(product);
+    }
+
+    public void deleteProduct(String id) {
+        Product product = productRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        productRepository.deleteById(product.getId());
+        log.info("Product with id {} deleted successfully", product.getId());
     }
 }

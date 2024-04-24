@@ -30,4 +30,16 @@ public class ProductController {
     public List<ProductResponseDTO> getAllProducts() {
         return productService.getAllProducts();
     }
+
+    @GetMapping(path = "/byId/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ProductResponseDTO getProductById(@PathVariable String id) {
+        return productService.getProductById(id);
+    }
+
+    @DeleteMapping(path = "/delete/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteProduct(@PathVariable String id) {
+        productService.deleteProduct(id);
+    }
 }
