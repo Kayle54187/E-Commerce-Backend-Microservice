@@ -37,6 +37,7 @@ public class ProductService {
 
     private ProductResponseDTO mapProductToProductResponse(Product product) {
         return ProductResponseDTO.builder()
+                .id(product.getId())
                 .name(product.getName())
                 .description(product.getDescription())
                 .price(product.getPrice())
