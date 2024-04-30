@@ -62,7 +62,7 @@ class ProductServiceApplicationTests {
 	}
 
 	@Test
-	void shouldGetProducts() throws Exception {
+	void shouldGetProductAndDeleteProduct() throws Exception {
 
 		mockMvc.perform(
 				MockMvcRequestBuilders.get("/api/product/all")
@@ -70,11 +70,6 @@ class ProductServiceApplicationTests {
 		).andExpect(
                 status().isOk()
 		);
-	}
-
-	// This test method is still under development
-	@Test
-	void shouldDeleteProduct() throws Exception {
 
 		Assertions.assertEquals(1, productRepository.findAll().size());
 
